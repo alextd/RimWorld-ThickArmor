@@ -23,8 +23,7 @@ namespace ThickArmor
 			Log.Message("Doing it, damAmount= " + damAmount + ", armorRating = " + armorRating + ", armor = " + armor);
 			int layers = armor?.def.apparel.layers.Count ?? 1;
 
-			MethodInfo ApplyArmorInfo = AccessTools.Method(
-				typeof(ArmorUtility), "ApplyArmor");
+			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
 			var args = new object[] { 0.0f, armorRating, armor, damageDef };
 
 			while (layers-- > 0)
@@ -42,8 +41,7 @@ namespace ThickArmor
 
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
-			MethodInfo ApplyArmorInfo = AccessTools.Method(
-				typeof(ArmorUtility), "ApplyArmor");
+			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
 			MethodInfo ApplyArmorLayeredInfo = AccessTools.Method(
 				typeof(GetPostArmorDamage_Patch), nameof(ApplyArmorLayered));
 

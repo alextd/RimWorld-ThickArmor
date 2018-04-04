@@ -19,8 +19,8 @@ namespace ThickArmor
 			var options = new Listing_Standard();
 			options.Begin(wrect);
 
-			options.Label("Armor is applied for each layer of apparel, adding to the next. Power Armor takes up two layers, but its armor is only applied once. An armor vest and jacket could outperform power armor. This simply applies the armor again, for its second layer, with a % reduction in power.");
-			options.Label("Effectiveness that the next layer of armor has: " +  String.Format("{0:0}%", secondLayerEffectiveness * 100));
+			options.Label("ArmorExplanation".Translate());
+			options.Label("NextLayerEffectiveness".Translate() +  String.Format("{0:0}%", secondLayerEffectiveness * 100));
 			secondLayerEffectiveness = options.Slider(secondLayerEffectiveness, 0.0f, 1.0f);
 
 			options.End();
