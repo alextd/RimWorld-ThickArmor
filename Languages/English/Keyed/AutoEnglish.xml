@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 	
-	<ArmorExplanation>Armor is applied for each layer of apparel, adding to the next. Power Armor takes up two layers, but its armor is only applied once. An armor vest and jacket could outperform power armor. This simply applies the armor again, for its second layer, with a % reduction in power.</ArmorExplanation>
-	<NextLayerEffectiveness>Effectiveness that the next layer of armor has: </NextLayerEffectiveness>
-	<ThickArmor>Thick Armor</ThickArmor>
+	<TD.ArmorExplanation>Armor is applied for each layer of apparel, adding to the next. Power Armor takes up two layers, but its armor is only applied once. An armor vest and jacket could outperform power armor. This simply applies the armor again, for its second layer, with a % reduction in power.</TD.ArmorExplanation>
+	<TD.NextLayerEffectiveness>Effectiveness that the next layer of armor has: </TD.NextLayerEffectiveness>
+	<TD.ThickArmor>Thick Armor</TD.ThickArmor>
 	
 </LanguageData>

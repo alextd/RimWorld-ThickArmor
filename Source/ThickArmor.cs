@@ -26,7 +26,7 @@ namespace ThickArmor
 
 		public override string SettingsCategory()
 		{
-			return "ThickArmor".Translate();
+			return "TD.ThickArmor".Translate();
 		}
 	}
 }

@@ -19,8 +19,8 @@ namespace ThickArmor
 			var options = new Listing_Standard();
 			options.Begin(wrect);
 
-			options.Label("ArmorExplanation".Translate());
-			options.Label("NextLayerEffectiveness".Translate() +  String.Format("{0:0}%", secondLayerEffectiveness * 100));
+			options.Label("TD.ArmorExplanation".Translate());
+			options.Label("TD.NextLayerEffectiveness".Translate() +  String.Format("{0:0}%", secondLayerEffectiveness * 100));
 			secondLayerEffectiveness = options.Slider(secondLayerEffectiveness, 0.0f, 1.0f);
 
 			options.End();
