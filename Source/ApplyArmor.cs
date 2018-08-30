@@ -15,30 +15,37 @@ namespace ThickArmor
 
 	[HarmonyPatch(typeof(ArmorUtility))]
 	[HarmonyPatch("GetPostArmorDamage")]
-	//public static int GetPostArmorDamage(Pawn pawn, int amountInt, BodyPartRecord part, DamageDef damageDef)
+	//public static float GetPostArmorDamage(Pawn pawn, float amount, float armorPenetration, BodyPartRecord part, ref DamageDef damageDef, out bool deflectedByMetalArmor, out bool diminishedByMetalArmor)
 	class GetPostArmorDamage_Patch
 	{
-		public static void ApplyArmorLayered(ref float damAmount, float armorRating, Apparel armor, DamageDef damageDef)
+		//private static void ApplyArmor(ref float damAmount, float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
+		public static void ApplyArmorLayered(ref float damAmount, float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
 		{
-			Log.Message("Doing it, damAmount= " + damAmount + ", armorRating = " + armorRating + ", armor = " + armor);
-			int layers = armor?.def.apparel.layers.Count ?? 1;
+			Log.Message($"Doing it, damAmount= {damAmount}, armorPenetration = {armorPenetration}, armorRating = {armorRating}, armorThing = {armorThing}" +
+				$", damageDef = {damageDef}, pawn = {pawn}");
+			int layers = armorThing?.def.apparel.layers.Count ?? 1;
 
 			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
-			var args = new object[] { 0.0f, armorRating, armor, damageDef };
+			var args = new object[] { damAmount, armorPenetration, armorRating, armorThing, damageDef, pawn, false };
 
-			while (layers-- > 0)
+			do
 			{
-				args[0] = damAmount;
+				//Call it
 				ApplyArmorInfo.Invoke(null, args);
+				metalArmor = (bool)args[6];
+				damageDef = (DamageDef)args[4];
 				damAmount = (float)args[0];
+				Log.Message($"layer {layers}, damAmount= {damAmount}, damageDef = {damageDef}, pawn = {pawn}, metalArmor = {metalArmor}");
 
+				//Dampen effects
 				armorRating *= Settings.Get().secondLayerEffectiveness;
-				args[1] = armorRating;
-				args[2] = null;//ApplyArmor only damages it ; null for extra calls
-				Log.Message("Now " + damAmount);
-			}
-		}
 
+				//Apply new value
+				args[2] = armorRating;
+			}
+			while (--layers > 0 && damAmount > 0);
+		}
+		
 		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
