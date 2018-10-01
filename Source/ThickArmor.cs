@@ -2,6 +2,7 @@
 using Verse;
 using UnityEngine;
 using Harmony;
+using RimWorld;
 
 namespace ThickArmor
 {
@@ -15,7 +16,18 @@ namespace ThickArmor
 			HarmonyInstance.DEBUG = true;
 #endif
 			HarmonyInstance harmony = HarmonyInstance.Create("uuugggg.rimworld.ThickArmor.main");
+			
+			//Turn off DefOf warning since harmony patches trigger it.
+			harmony.Patch(AccessTools.Method(typeof(DefOfHelper), "EnsureInitializedInCtor"),
+				new HarmonyMethod(typeof(Mod), "EnsureInitializedInCtorPrefix"), null);
+			
 			harmony.PatchAll();
+		}
+
+		public static bool EnsureInitializedInCtorPrefix()
+		{
+			//No need to display this warning.
+			return false;
 		}
 
 		public override void DoSettingsWindowContents(Rect inRect)
