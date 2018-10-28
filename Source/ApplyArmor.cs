@@ -12,12 +12,12 @@ using Harmony;
 
 namespace ThickArmor
 {
-
 	[HarmonyPatch(typeof(ArmorUtility))]
 	[HarmonyPatch("GetPostArmorDamage")]
 	//public static float GetPostArmorDamage(Pawn pawn, float amount, float armorPenetration, BodyPartRecord part, ref DamageDef damageDef, out bool deflectedByMetalArmor, out bool diminishedByMetalArmor)
 	class GetPostArmorDamage_Patch
 	{
+		static MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
 		//private static void ApplyArmor(ref float damAmount, float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
 		public static void ApplyArmorLayered(ref float damAmount, float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
 		{
@@ -25,7 +25,6 @@ namespace ThickArmor
 				$", damageDef = {damageDef}, pawn = {pawn}");
 			int layers = armorThing?.def.apparel.layers.Count ?? 1;
 
-			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
 			var args = new object[] { damAmount, armorPenetration, armorRating, armorThing, damageDef, pawn, false };
 
 			do
