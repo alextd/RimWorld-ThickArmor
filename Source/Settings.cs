@@ -7,7 +7,7 @@ namespace ThickArmor
 {
 	class Settings : ModSettings
 	{
-		public float secondLayerEffectiveness = 0.5f;
+		public float secondLayerEffectiveness = 0.6f;
 
 		public static Settings Get()
 		{
@@ -20,7 +20,7 @@ namespace ThickArmor
 			options.Begin(wrect);
 
 			options.Label("TD.ArmorExplanation".Translate());
-			options.Label("TD.NextLayerEffectiveness".Translate() +  String.Format("{0:0}%", secondLayerEffectiveness * 100));
+			options.Label("TD.NextLayerEffectiveness".Translate() + String.Format("{0:0}%", secondLayerEffectiveness * 100));
 			secondLayerEffectiveness = options.Slider(secondLayerEffectiveness, 0.0f, 1.0f);
 
 			options.End();
@@ -28,7 +28,7 @@ namespace ThickArmor
 		
 		public override void ExposeData()
 		{
-			Scribe_Values.Look(ref secondLayerEffectiveness, "secondLayerEffectiveness", 0.5f);
+			Scribe_Values.Look(ref secondLayerEffectiveness, "secondLayerEffectiveness", 0.6f);
 		}
 	}
 }
