@@ -3,7 +3,7 @@
 	<name>Thick Armor</name>
 	<author>Uuugggg</author>
 	<supportedVersions>
-		<li>1.0.0</li>
+		<li>1.0</li>
 	</supportedVersions>
 	<description>Power Armor applies its armor value for each layer it occupies.
 How effective this is configurable in the settings.
