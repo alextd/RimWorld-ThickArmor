@@ -7,7 +7,7 @@ using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using Harmony;
+using HarmonyLib;
 
 
 namespace ThickArmor
@@ -54,7 +54,7 @@ namespace ThickArmor
 			foreach (CodeInstruction instruction in instructions)
 			{
 				//IL_0068: call         void Verse.ArmorUtility::ApplyArmor(float32 &, float32, class Verse.Thing, class Verse.DamageDef)
-				if (instruction.opcode == OpCodes.Call && instruction.operand == ApplyArmorInfo)
+				if (instruction.opcode == OpCodes.Call && instruction.operand.Equals(ApplyArmorInfo))
 					instruction.operand = ApplyArmorLayeredInfo;
 				yield return instruction;
 			}
