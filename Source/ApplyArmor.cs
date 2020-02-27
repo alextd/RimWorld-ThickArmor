@@ -55,8 +55,9 @@ namespace ThickArmor
 			{
 				//IL_0068: call         void Verse.ArmorUtility::ApplyArmor(float32 &, float32, class Verse.Thing, class Verse.DamageDef)
 				if (instruction.Calls(ApplyArmorInfo))
-					instruction.operand = ApplyArmorLayeredInfo;
-				yield return instruction;
+					yield return new CodeInstruction(OpCodes.Call, ApplyArmorLayeredInfo);
+				else 
+					yield return instruction;
 			}
 		}
 	}
