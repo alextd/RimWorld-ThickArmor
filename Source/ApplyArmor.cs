@@ -37,7 +37,7 @@ namespace ThickArmor
 				Log.Message($"layer {layers}, damAmount= {damAmount}, damageDef = {damageDef}, pawn = {pawn}, metalArmor = {metalArmor}");
 
 				//Dampen effects
-				armorRating *= Settings.Get().secondLayerEffectiveness;
+				armorRating *= Mod.settings.secondLayerEffectiveness;
 
 				//Apply new value
 				args[2] = armorRating;

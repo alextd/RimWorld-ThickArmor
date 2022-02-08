@@ -5,14 +5,9 @@ using Verse;
 
 namespace ThickArmor
 {
-	class Settings : ModSettings
+	public class Settings : ModSettings
 	{
 		public float secondLayerEffectiveness = 0.6f;
-
-		public static Settings Get()
-		{
-			return LoadedModManager.GetMod<ThickArmor.Mod>().GetSettings<Settings>();
-		}
 
 		public void DoWindowContents(Rect wrect)
 		{
