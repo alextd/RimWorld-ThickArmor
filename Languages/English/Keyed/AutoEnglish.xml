@@ -3,6 +3,8 @@
 	
 	<TD.ArmorExplanation>Armor is applied to an attack for each layer of apparel separately. Marine Armor takes up two layers, but its armor is only applied once. A flak vest and jacket could equal marine armor (for sharp attacks on torso with low armor penetration, otherwise marine armor is better). This mod simply applies the thick armor again, for its second layer, with a % reduction in power.\n\nPlus, shouldn't marine armor be no-questions-asked better than flak layers?</TD.ArmorExplanation>
 	<TD.NextLayerEffectiveness>Effectiveness that the next layer of armor has: </TD.NextLayerEffectiveness>
+	<TD.PenetrationExplanation>Armor Penetration can completely negate inner layers of armor like shirts. Thick Armor can lower armor penetration after passing through higher armor layers (proportional to the ratio of 2xPenetration:Rating, no reduction if 2xPenetration>Rating)</TD.PenetrationExplanation>
+	<TD.PenetrationReduction>Armor penetration reduced: </TD.PenetrationReduction>
 	<TD.ThickArmor>Thick Armor</TD.ThickArmor>
 	
 </LanguageData>
