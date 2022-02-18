@@ -20,9 +20,9 @@ namespace ThickArmor
 	public static class GetPostArmorDamage_Patch
 	{
 		public static string lastShotlog = "";
-		public static void Log(string s)
+		public static void LogMessage(string s)
 		{
-			Verse.Log.Message(s);
+			Log.Message(s);
 			lastShotlog += s + "\n";
 		}
 
@@ -38,9 +38,9 @@ namespace ThickArmor
 		public static void ApplyArmorLayered(ref float damAmount, ref float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
 		{
 			int layers = armorThing?.def.apparel.layers.Count ?? 1;
-			Log($"Doing ThickArmor for {pawn} wearing {armorThing?.LabelCap ?? "nothing"}");
-			Log($"{layers} layers		Damage		Penetration	Armor		Type		Metal");
-			Log($"START		{damAmount:0.0}		{armorPenetration:0.0%}		{armorRating :0.0%}		{damageDef}		False");
+			LogMessage($"Doing ThickArmor for {pawn} wearing {armorThing?.LabelCap ?? "nothing"}");
+			LogMessage($"{layers} layers		Damage		Penetration	Armor		Type		Metal");
+			LogMessage($"START		{damAmount:0.0}		{armorPenetration:0.0%}		{armorRating :0.0%}		{damageDef}		False");
 
 			do
 			{
@@ -60,7 +60,7 @@ namespace ThickArmor
 				//Dampen armor rating
 				armorRating *= Mod.settings.secondLayerEffectiveness;
 
-				Log($"After {layers}:		{damAmount:0.0}		{armorPenetration:0.0%}		{armorRating:0.0%}		{damageDef}		{metalArmor}");
+				LogMessage($"After {layers}:		{damAmount:0.0}		{armorPenetration:0.0%}		{armorRating:0.0%}		{damageDef}		{metalArmor}");
 			}
 			while (--layers > 0 && damAmount > 0);
 		}
