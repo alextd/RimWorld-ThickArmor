@@ -30,7 +30,7 @@ namespace ThickArmor
 				options.Gap(50f);
 				options.GapLine();
 				Text.Font = GameFont.Medium;
-				options.Label("Effects of Thick Armor on Last Shot:");
+				options.Label("TD.EffectsOfThickArmorOnLastShot".Translate());
 				Text.Font = GameFont.Small;
 				options.Label(GetPostArmorDamage_Patch.lastShotlog);
 			}

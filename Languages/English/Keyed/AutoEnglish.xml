@@ -6,5 +6,6 @@
 	<TD.PenetrationExplanation>Armor Penetration can completely negate inner layers of armor like shirts. Thick Armor can lower armor penetration after passing through higher armor layers (proportional to the ratio of 2xPenetration:Rating, no reduction if 2xPenetration>Rating)</TD.PenetrationExplanation>
 	<TD.PenetrationReduction>Armor penetration reduced: </TD.PenetrationReduction>
 	<TD.ThickArmor>Thick Armor</TD.ThickArmor>
+	<TD.EffectsOfThickArmorOnLastShot>Effects of Thick Armor on Last Shot:</TD.EffectsOfThickArmorOnLastShot>
 	
 </LanguageData>
