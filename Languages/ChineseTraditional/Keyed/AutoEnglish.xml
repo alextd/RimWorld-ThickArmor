@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	
+	<TD.ArmorExplanation>裝甲在計算傷害時是由外到內逐層計算的，而海軍裝甲這一類防具占據了兩層空間卻只計算一次。防彈夾克加上防彈背心的組合在有些情況下防禦效果反而比海軍裝甲更優秀。這個mod會讓多層裝甲以弱化的屬性多被計算一次，難道海軍裝甲本不應比防彈套裝更優秀嗎？</TD.ArmorExplanation>
+	<TD.NextLayerEffectiveness>每有額外一層，該層的裝甲值會衰落至：</TD.NextLayerEffectiveness>
+	<TD.PenetrationExplanation>通常來說，高穿甲武器會讓穿在裝甲下的襯衫等貼身衣物完全失去防護作用。該功能能讓高層裝甲減少攻擊對內層的穿甲力。（與2x穿甲值:裝甲值成正比，如果2x穿甲值>裝甲值則不會起效）</TD.PenetrationExplanation>
+	<TD.PenetrationReduction>穿甲力衰減：</TD.PenetrationReduction>
+	<TD.ThickArmor>多層穿甲</TD.ThickArmor>
+	<TD.EffectsOfThickArmorOnLastShot>上一次攻擊里多層裝甲的效果：</TD.EffectsOfThickArmorOnLastShot>
+	
+</LanguageData>
