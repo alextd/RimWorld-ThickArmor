@@ -32,7 +32,7 @@ namespace ThickArmor
 		}
 
 
-		public static ApplyArmorDelegate ApplyArmorInfo = AccessTools.MethodDelegate<ApplyArmorDelegate>(AccessTools.Method(typeof(ArmorUtility), "ApplyArmor"));
+		public static ApplyArmorDelegate ApplyArmor = AccessTools.MethodDelegate<ApplyArmorDelegate>(AccessTools.Method(typeof(ArmorUtility), "ApplyArmor"));
 
 		//private static void ApplyArmor(ref float damAmount, float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
 		public static void ApplyArmorLayered(ref float damAmount, ref float armorPenetration, float armorRating, Thing armorThing, ref DamageDef damageDef, Pawn pawn, out bool metalArmor)
@@ -47,7 +47,7 @@ namespace ThickArmor
 				//float previousAmount = damAmount;
 
 				//Call it
-				ApplyArmorInfo.Invoke(ref damAmount, armorPenetration, armorRating, armorThing, ref damageDef, pawn, out metalArmor);
+				ApplyArmor(ref damAmount, armorPenetration, armorRating, armorThing, ref damageDef, pawn, out metalArmor);
 
 				//if (previousAmount == damAmount) //only if damage not reduced
 				if (Mod.settings.penetrationReduction &&
