@@ -64,22 +64,51 @@ namespace ThickArmor
 			}
 			while (--layers > 0 && damAmount > 0);
 		}
-		
-		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+
+		// TODO: Dynamically find what the inst to load armorPenetration for ApplyArmor is and change it to address version
+		// For now I'm just gonna manually figure that out, and it happens to be the same in the both places this is patched.
+		public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) =>
+			TranspilerManualReplace(instructions, (CodeInstruction inst) => inst.opcode == OpCodes.Ldarg_2, new CodeInstruction(OpCodes.Ldarga_S, 2));
+
+		public static IEnumerable<CodeInstruction> TranspilerManualReplace(IEnumerable<CodeInstruction> instructions, Predicate<CodeInstruction> loadPenOldInst, CodeInstruction loadPenAddrInst)
 		{
 			MethodInfo ApplyArmorInfo = AccessTools.Method(typeof(ArmorUtility), "ApplyArmor");
 			MethodInfo ApplyArmorLayeredInfo = AccessTools.Method(
 				typeof(GetPostArmorDamage_Patch), nameof(ApplyArmorLayered));
 
-			foreach (CodeInstruction instruction in instructions)
+			var instList = instructions.ToList();
+			for(int i = 0; i < instList.Count; i++)
 			{
-				if (instruction.opcode == OpCodes.Ldarg_2)  //change armorPenetration to ref armorPenetration (big problem if later patches use armorPenentration elswhere)
-					yield return new CodeInstruction(OpCodes.Ldarga_S, 2);
-				else if (instruction.Calls(ApplyArmorInfo))
-					yield return new CodeInstruction(OpCodes.Call, ApplyArmorLayeredInfo);
-				else 
-					yield return instruction;
+				var instruction = instList[i];
+				if (instruction.Calls(ApplyArmorInfo))
+				{
+					instruction.operand = ApplyArmorLayeredInfo;
+
+					// change arg for loading armor penetration to the address type
+					for( int prevI = i; prevI > 0; prevI--)
+					{
+						if (loadPenOldInst(instList[prevI]))
+						{
+							instList[prevI] = loadPenAddrInst;
+							break;
+						}
+					}
+				}
 			}
+			return instList;
+		}
+
+		static GetPostArmorDamage_Patch()
+		{
+			// For for Athena Framework
+			if(AccessTools.Method("AthenaCombatUtility:ApplyArmor") is MethodInfo patchMethod)
+			{
+				Harmony harmony = new Harmony("uuugggg.rimworld.ThickArmor.AthenaSupport");
+
+				// Luckily it's the same transpiler with same ldarg_2
+				harmony.Patch(patchMethod, transpiler: new HarmonyMethod(typeof(GetPostArmorDamage_Patch), nameof(Transpiler)));
+			}
+
 		}
 	}
 }
